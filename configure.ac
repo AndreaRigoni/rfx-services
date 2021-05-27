@@ -51,6 +51,13 @@ dnl AX_TARGET_SELFHELP /////////////////////////////////////////////////////////
 AX_TARGET_SELFHELP
 
 # //////////////////////////////////////////////////////////////////////////// #
+# //  DOCKER BUILD /////////////////////////////////////////////////////////// #
+# //////////////////////////////////////////////////////////////////////////// #
+
+m4_sinclude(conf/kscripts/docker.ac)
+AX_DOCKER_BUILD
+
+# //////////////////////////////////////////////////////////////////////////// #
 
 # AC_CONFIG_HEADERS([config.h])
 
@@ -77,6 +84,7 @@ AC_CHECK_PROGS([PERL],[perl])
 
 ## BUILD_COMMON ##
 m4_sinclude(conf/kscripts/build_common.ac)
+
 
 ## SERVICES ##
 m4_sinclude(services/docker_services.ac)
@@ -111,5 +119,8 @@ AC_CONFIG_FILES(
 				 services/ghost/Makefile
 				 services/image-super-resolution/Makefile
 				 services/homeassistant/Makefile
+				 services/gitlab-runner/Makefile
+				 services/etherpad/Makefile
+
                )
 AC_OUTPUT
