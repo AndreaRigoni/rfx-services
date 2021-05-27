@@ -56,3 +56,58 @@ services:
       # - "constraint:node==<yourworkernode>"
     
 
+  jplocal:
+    image: jupyter/pyspark_mdsplus
+    depends_on:
+      - spark
+    ports:
+      - "8889:8888"
+    labels:
+      - "reroute.ip=$(REROUTE_IP)"
+      - "reroute.ports=8889:8889"
+    volumes:
+      - ${SERVICE_DIR}/.jupyter:/home/jovyan/.jupyter
+      - ${STORE_DIR}/work:/home/jovyan/work
+    # environment:
+      # - "SPARK_MASTER=spark://spark:7077"
+      # - "PYSPARK_PYTHON=/usr/bin/python3.7"
+      # - "PYSPARK_DRIVER_PYTHON=/usr/bin/python3.7"
+      # - "constraint:node==<yourworkernode>"
+
+
+
+  # spark:
+  #   # image: ${DOCKER_IMAGE}
+  #   image: 
+  #   command: bin/spark-class org.apache.spark.deploy.master.Master -h master
+  #   hostname: master
+  #   environment:
+  #     MASTER: spark://master:7077
+  #     SPARK_CONF_DIR: /conf
+  #     SPARK_PUBLIC_DNS: ${EXTERNAL_IP}
+  #   ports:
+  #     - 4040:4040
+  #     - 6066:6066
+  #     - 7077:7077
+  #     - 8080:8080
+
+  # worker:
+  #   image: ${DOCKER_IMAGE}
+  #   command: bin/spark-class org.apache.spark.deploy.worker.Worker spark://master:7077
+  #   hostname: worker
+  #   environment:
+  #     SPARK_CONF_DIR: /conf
+  #     SPARK_WORKER_CORES: 2
+  #     SPARK_WORKER_MEMORY: 1g
+  #     SPARK_PUBLIC_DNS: ${EXTERNAL_IP}
+  #   depends_on:
+  #     - master
+  #   ports:
+  #     - 8081:8081
+
+  # redis:
+  #   image: redis
+  #   ports:
+  #    - 6379
+  #   volumes:
+  #    - ${STORE_DIR}/redis_data:/data
