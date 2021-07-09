@@ -7,15 +7,19 @@ services:
     image: $(DOCKER_IMAGE)
     restart: always
     ports:
-      - 8011:80
-    # labels:
-    #    - "reroute.ip=${REROUTE_IP}"
-    #    - "reroute.ports=${REROUTE_PORTS}"
+      - 80  
+      - 443
+
+    labels:
+       - "reroute.ip=$(REROUTE_IP)"
+       - "reroute.ports=$(REROUTE_PORTS)"
     # links:
     #   - database
     volumes:
         - ${SERVICE_DIR}/LocalSettings.php:/var/www/html/LocalSettings.php
         - ${SERVICE_DIR}/ldap.json:/var/www/html/ldap.json
+        - ${SERVICE_DIR}/ssl/private/wiki.igi.cnr.it_2021.key:/etc/ssl/private/wiki.igi.cnr.it_2021.key
+        - ${SERVICE_DIR}/ssl/certs/wiki_igi_cnr_it.cer:/etc/ssl/certs/wiki_igi_cnr_it.cer
         - ${STORE_DIR}/rfxwiki.sqlite:/var/www/data/rfxwiki.sqlite
         - ${STORE_DIR}/assets:/var/www/html/assets
         - ${STORE_DIR}/skins:/var/www/html/rfx/skins

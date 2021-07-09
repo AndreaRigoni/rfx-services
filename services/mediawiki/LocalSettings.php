@@ -10,6 +10,12 @@
 # Further documentation for configuration settings may be found at:
 # https://www.mediawiki.org/wiki/Manual:Configuration_settings
 
+
+// debugging ... 
+// put debug in HTML page as comments
+$wgDebugComments = true;
+wfDebug( "DEBUG: Enable log in HTML source\n" );
+
 # Protect against web entry
 if ( !defined( 'MEDIAWIKI' ) ) {
 	exit;
@@ -29,11 +35,29 @@ $wgSitename = $_ENV["WG_SITENAME"];
 ## For more information on customizing the URLs
 ## (like /w/index.php/Page_title to /wiki/Page_title) please see:
 ## https://www.mediawiki.org/wiki/Manual:Short_URL
-$wgScriptPath = "";
+#### SEE BELOW -- $wgScriptPath = "";
 
 ## The protocol and server name to use in fully-qualified URLs
 # $wgServer = "http://localhost:30002";
-$wgServer = "http://spilds.rfx.local:8011";
+#### SEE BELOW --$wgServer = "http://wiki.igi.cnr.it";
+
+
+##$strr = "GMY: _SERVER: -" . $_SERVER['SERVER_NAME'] . "-";
+##ob_start();
+##var_dump($_SERVER);
+##$strr = ob_get_clean();
+##error_log($strr);
+ if (strcasecmp($_SERVER['HTTP_X_FORWARDED_SERVER'], "portal.igi.cnr.it") == 0) {
+   $wgScriptPath = "/wiki";
+   $wgServer = "http://portal.igi.cnr.it";
+ } else {
+   $wgScriptPath = "";
+   $wgServer = "http://wiki.igi.cnr.it";
+ }
+##$strr = "GMY: wgServer: =" . $wgServer . "=";
+##error_log($strr);
+
+
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
@@ -137,15 +161,21 @@ $wgRightsIcon = "";
 $wgDiff3 = "/usr/bin/diff3";
 
 
+# But allow them to read e.g., these pages:
+#$wgWhitelistRead =  [ "Special:UserLogin" ];
+
+$wgWhitelistRead = [
+    "Main Page", "MediaWiki:Common.css", "MediaWiki:Common.js"
+    ];
 
 // # Disable reading by anonymous users
-// $wgGroupPermissions['*']['read'] = false;
+$wgGroupPermissions['*']['read'] = false;
 
 // # Prevent new user registrations except by sysops
-// $wgGroupPermissions['*']['createaccount'] = false;
+$wgGroupPermissions['*']['createaccount'] = false;
 
 // # Disable anonymous editing
-// $wgGroupPermissions['*']['edit'] = false;
+$wgGroupPermissions['*']['edit'] = false;
 
 
 ## Default skin: you can change the default skin. Use the internal symbolic
@@ -362,7 +392,7 @@ $wgCachePages = false;
 
 
 wfLoadExtension( 'SimpleMathJax', "$IP/rfx/extensions/SimpleMathJax-master/extension.json"  );
-$wgSmjScale = 2.0;
+// $wgSmjScale = 1.0;  default // WAS 2.0, but is quite big
 
 
 # require_once "$IP/extensions/ExternalData/ExternalData.php";
@@ -375,7 +405,8 @@ wfLoadExtension ('NoTitle', "$IP/rfx/extensions/NoTitle/extension.json" );
 $wgRestrictDisplayTitle = false;
 
 // Cite extension
-// wfLoadExtension( 'Cite' );
+wfLoadExtension( 'Cite' );
+
 
 // wfLoadExtension( 'PdfHandler' );
 
@@ -385,8 +416,8 @@ $wgNamespacesWithSubpages[NS_MAIN] = true;
 # Enable subpages in the template namespace
 $wgNamespacesWithSubpages[NS_TEMPLATE] = true;
 
-
-
+// SimpleTooltip
+require_once "$IP/rfx/extensions/SimpleTooltip/SimpleTooltip.php";
 
 
 

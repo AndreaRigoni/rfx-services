@@ -1,0 +1,64 @@
+{
+	"name": "External Data",
+	"version": "2.1",
+	"author": [
+		"Yaron Koren",
+		"..."
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:External_Data",
+	"descriptionmsg": "externaldata-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "parserhook",
+	"requires": {
+		"MediaWiki": ">= 1.28.0"
+	},
+	"SpecialPages": {
+		"GetData": "EDGetData"
+	},
+	"MessagesDirs": {
+		"ExternalData": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"ExternalDataMagic": "ExternalData.i18n.magic.php",
+		"ExternalDataAlias": "ExternalData.i18n.alias.php"
+	},
+	"AutoloadClasses": {
+		"ExternalDataHooks": "includes/ExternalDataHooks.php",
+		"EDUtils": "includes/EDUtils.php",
+		"EDHttpWithHeaders": "includes/EDHttpWithHeaders.php",
+		"EDParserFunctions": "includes/EDParserFunctions.php",
+		"EDGetData": "includes/EDGetData.php",
+		"EDJsonObject": "includes/EDJsonObject.php",
+		"EDArraySlice": "includes/EDArraySlice.php"
+	},
+	"Hooks": {
+		"ParserFirstCallInit": "ExternalDataHooks::registerParser"
+	},
+	"config": {
+		"_prefix": "edg",
+		"Values": [],
+		"StringReplacements": [],
+		"CacheTable": null,
+		"AlwaysAllowStaleCache": true,
+		"AllowSSL": true,
+		"ExternalValueVerbose": true,
+		"CacheExpireTime": 604800,
+		"TryEncodings": ["ASCII", "UTF-8", "Windows-1251", "Windows-1252", "Windows-1254", "KOI8-R", "ISO-8859-1"],
+		"DBServer": [],
+		"DBServerType ": [],
+		"DBName": [],
+		"DBUser": [],
+		"DBPass": [],
+		"DBDirectory": [],
+		"DBFlags": [],
+		"DBTablePrefix": [],
+		"DirectoryPath": [],
+		"FilePath": [],
+		"HTTPOptions": {
+			"timeout": "default"
+		}
+	},
+	"manifest_version": 1
+}

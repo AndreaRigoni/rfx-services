@@ -1,0 +1,69 @@
+## ////////////////////////////////////////////////////////////////////////// //
+##
+## This file is part of the autoconf-bootstrap project.
+## Copyright 2018 Andrea Rigoni Garola <andrea.rigoni@igi.cnr.it>.
+##
+## This program is free software: you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation, either version 3 of the License, or
+## (at your option) any later version.
+##
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
+##
+## You should have received a copy of the GNU General Public License
+## along with this program.  If not, see <http://www.gnu.org/licenses/>.
+##
+## ////////////////////////////////////////////////////////////////////////// //
+
+
+
+# //////////////////////////////////////////////////////////////////////////// #
+# //  SERVICE_MEDIAWIKI/////////////////////////////////////////////////////// #
+# //////////////////////////////////////////////////////////////////////////// #
+
+menuconfig SERVICE_MEDIAWIKI
+	 bool "Enable MEDIAWIKI service"
+	 default n
+	 ---help---
+	  Enable MediaWiki service through Docker image
+
+if SERVICE_MEDIAWIKI
+
+  config MEDIAWIKI_PUBLIC_IP
+    string "public ip"
+    default ""
+    --- help ---
+      Chose a fixed public ip for MediaWiki service that will be mapped using a set
+      of iptables rulse that overloads the docker swarm ingress network. A chain
+      named as the service name will be created in the manager node, see it with
+      the command: sudo iptables -S and sudo iptables -t nat -S
+
+      NOTE: use empty field if you don't want to apply any reroute rule
+
+  config MEDIAWIKI_PUBLIC_PORTS
+    string "port map"
+    default "80:80 443:443"
+    --- help ---
+      Chose a set of ports to map between the ingress docker network and the ip
+      for public access. the left side is the published port while the right is
+      the exposed service port within the ingress network visible in the docker
+      docker-compose.yml file
+
+#  config GITLAB_SELFSIGNED_SSL
+#    bool GITLAB_SELFSIGNED_SSL
+#    default y
+
+#  config GITLAB_SSLCERT_FILE_CRT
+#    string "GITLAB_SSLCERT_FILE_CRT"
+#    depends on !GITLAB_SELFSIGNED_SSL
+
+#  config GITLAB_SSLCERT_FILE_KEY
+#    string "GITLAB_SSLCERT_FILE_KEY"
+#    depends on !GITLAB_SELFSIGNED_SSL
+
+
+endif # SERVICE_MEDIAWIKI
+
