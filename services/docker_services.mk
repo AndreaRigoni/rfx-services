@@ -32,8 +32,8 @@ export  SWARM_NAME \
 		SERVICE_DIR \
 		SERVICE_EXPORTS \
 		REROUTE_IP \
-    	REROUTE_PORTS \
-    	COMPOSER_FILE \
+		REROUTE_PORTS \
+		COMPOSER_FILE \
 		DOCKER_IMAGE \
 		date
 
@@ -111,10 +111,10 @@ compose-logs:
 compose-down:
 	@ docker-compose -f ${COMPOSER_FILE} down
 
-# portainer-init: ##@docker_services poirtainer init (browse localhost:9000 then)
-# portainer-init:
-# 	@ docker volume create portainer_data; \
-#       docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+portainer-init: ##@docker_services poirtainer init (browse localhost:9000 then)
+portainer-init:
+	@ docker volume create portainer_data; \
+	docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
 
 
 # docker-registry-init: ##@docker_services registry init (provide an image registry at localhost:5000)
@@ -183,7 +183,7 @@ $(install_tmpdir)/$(SERVICE_CONFIG_FILE): $(abs_top_srcdir)/services/service.con
 $(install_tmpdir)/$(SYSTEMD_SERVICE_FILE): $(abs_top_srcdir)/services/systemd.service.template | $(install_tmpdir)
 	@ $(call __ax_pl_envsubst2,$<,$@);
 
-$(COMPOSER_FILE): $(wildcard $(srcdir)/$(COMPOSER_FILE).in)
+$(COMPOSER_FILE): $(wildcard $(srcdir)/$(COMPOSER_FILE).in) Makefile
 	@ $(if $<,$(call __ax_pl_envsubst2,$<,$@),$(error missing $(srcdir)/$(COMPOSER_FILE).in));
 
 $(install_tmpdir)/$(notdir $(COMPOSER_FILE)): $(wildcard $(srcdir)/$(COMPOSER_FILE).in) | $(install_tmpdir)
