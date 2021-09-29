@@ -1,0 +1,45 @@
+version: '3'
+services:
+  mariadb:
+    image: docker.io/bitnami/mariadb:10.5
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=no
+      - MARIADB_USER=rfx_moodle
+      - MARIADB_DATABASE=rfx_moodle
+      - MARIADB_CHARACTER_SET=utf8mb4
+      - MARIADB_COLLATE=utf8mb4_unicode_ci
+    volumes:
+      - 'mariadb_data:/bitnami/mariadb'
+  moodle:
+    image: docker.io/bitnami/moodle:3
+    ports:
+      - '80:8080'
+      - '443:8443'
+    environment:
+      - MOODLE_DATABASE_HOST=mariadb
+      - MOODLE_DATABASE_PORT_NUMBER=3306
+      - MOODLE_DATABASE_USER=rfx_moodle
+      - MOODLE_DATABASE_NAME=rfx_moodle
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=no
+      
+      - MOODLE_SMTP_HOST=$(SMTP_SERVER_HOST)
+      - MOODLE_SMTP_PORT=$(SMTP_SERVER_PORT)
+      - MOODLE_SMTP_USER=
+      - MOODLE_SMTP_PASSWORD=
+      - MOODLE_SMTP_PROTOCOL=smtp
+
+
+    volumes:
+      - 'moodle_data:/bitnami/moodle'
+      - 'moodledata_data:/bitnami/moodledata'
+    depends_on:
+      - mariadb
+volumes:
+  mariadb_data:
+    driver: local
+  moodle_data:
+    driver: local
+  moodledata_data:
+    driver: local
