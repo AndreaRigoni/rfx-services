@@ -106,5 +106,7 @@ AC_CONFIG_FILES(
 				 services/mediawiki/Makefile
 				 services/wikijs/Makefile
 				 services/spider_wiki/Makefile
+				 services/django-ariaform/Makefile
+				 services/cmdbuild/Makefile
                )
 AC_OUTPUT
