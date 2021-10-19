@@ -13,8 +13,12 @@
 
 // debugging ... 
 // put debug in HTML page as comments
-$wgDebugComments = true;
-wfDebug( "DEBUG: Enable log in HTML source\n" );
+#$wgDebugComments = true;
+#wfDebug( "DEBUG: Enable log in HTML source\n" );
+
+
+$wgUsePathInfo = false;
+
 
 # Protect against web entry
 if ( !defined( 'MEDIAWIKI' ) ) {
@@ -39,7 +43,7 @@ $wgSitename = $_ENV["WG_SITENAME"];
 
 ## The protocol and server name to use in fully-qualified URLs
 # $wgServer = "http://localhost:30002";
-#### SEE BELOW --$wgServer = "http://wiki.igi.cnr.it";
+#### SEE BELOW --$wgServer = "https://wiki.igi.cnr.it";
 
 
 ##$strr = "GMY: _SERVER: -" . $_SERVER['SERVER_NAME'] . "-";
@@ -47,16 +51,21 @@ $wgSitename = $_ENV["WG_SITENAME"];
 ##var_dump($_SERVER);
 ##$strr = ob_get_clean();
 ##error_log($strr);
- if (strcasecmp($_SERVER['HTTP_X_FORWARDED_SERVER'], "portal.igi.cnr.it") == 0) {
-   $wgScriptPath = "/wiki";
-   $wgServer = "http://portal.igi.cnr.it";
- } else {
-   $wgScriptPath = "";
-   $wgServer = "http://wiki.igi.cnr.it";
- }
+# if (strcasecmp($_SERVER['HTTP_X_FORWARDED_SERVER'], "portal.igi.cnr.it") == 0) {
+#   $wgScriptPath = "/wiki";
+#   $wgServer = "https://portal.igi.cnr.it";
+# } else {
+#   $wgScriptPath = "";
+#   $wgServer = "https://wiki.igi.cnr.it";
+# }
 ##$strr = "GMY: wgServer: =" . $wgServer . "=";
 ##error_log($strr);
 
+$wgScriptPath = "/wiki";
+$wgServer = "https://portal.igi.cnr.it";
+
+
+//$wgInternalServer = "http://wiki.igi.cnr.it";
 
 
 ## The URL path to static resources (images, scripts, etc.)
@@ -379,10 +388,16 @@ if ( $ldapConfig ) {
 wfDebug('[RFX] Finished Loading LDAP !!');
 
 
+//wfLoadExtension( 'VisualEditor' );
+
+wfLoadExtension( 'WikiEditor' );
+$wgHiddenPrefs[] = 'usebetatoolbar';
+
 //
 // Semantic wiki
 //
-// enableSemantics( 'portal.igi.cnr.it' );
+//wfLoadExtension( 'SemanticMediaWiki', "$IP/rfx/extensions/SemanticMediaWiki/extension.json" );
+//enableSemantics( 'portal.igi.cnr.it' );
 
 wfLoadExtension( 'PageForms', "$IP/rfx/extensions/PageForms/extension.json" );
 $smwgCacheType = CACHE_NONE;
@@ -420,8 +435,14 @@ $wgNamespacesWithSubpages[NS_TEMPLATE] = true;
 require_once "$IP/rfx/extensions/SimpleTooltip/SimpleTooltip.php";
 
 
+wfLoadExtension( 'Scribunto', "$IP/rfx/extensions/Scribunto/extension.json" );
+$wgScribuntoDefaultEngine = 'luastandalone';
+
+wfLoadExtension( 'TemplateStyles' , "$IP/rfx/extensions/TemplateStyles/extension.json" );
+wfLoadExtension( 'Graph' , "$IP/rfx/extensions/Graph/extension.json" );
+wfLoadExtension( 'JsonConfig' , "$IP/rfx/extensions/JsonConfig/extension.json" );
 
 
+wfLoadExtension( 'ParserFunctions', "$IP/rfx/extensions/ParserFunctions/extension.json" );
 
-
-
+wfLoadExtension( 'SyntaxHighlight_GeSHi', "$IP/rfx/extensions/SyntaxHighlight_GeSHi/extension.json" );

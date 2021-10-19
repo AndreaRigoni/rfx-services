@@ -16,8 +16,10 @@ services:
     # links:
     #   - database
     volumes:
+        - ${SERVICE_DIR}/php.ini:/usr/local/etc/php/php.ini
         - ${SERVICE_DIR}/LocalSettings.php:/var/www/html/LocalSettings.php
         - ${SERVICE_DIR}/ldap.json:/var/www/html/ldap.json
+        - ${SERVICE_DIR}/ssl/wiki-ssl.conf:/etc/apache2/sites-enabled/wiki-ssl.conf
         - ${SERVICE_DIR}/ssl/private/wiki.igi.cnr.it_2021.key:/etc/ssl/private/wiki.igi.cnr.it_2021.key
         - ${SERVICE_DIR}/ssl/certs/wiki_igi_cnr_it.cer:/etc/ssl/certs/wiki_igi_cnr_it.cer
         - ${STORE_DIR}/rfxwiki.sqlite:/var/www/data/rfxwiki.sqlite
