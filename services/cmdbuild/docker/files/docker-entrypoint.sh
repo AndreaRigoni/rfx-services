@@ -17,14 +17,13 @@ while ! timeout 1 bash -c "echo > /dev/tcp/$POSTGRES_HOST/$POSTGRES_PORT"; do
   sleep 5
 done
 
-echo "Init DB"
-{ # try
+# echo "Init DB"
+# { # try
   
-    $CATALINA_HOME/webapps/cmdbuild/cmdbuild.sh dbconfig create $CMDBUILD_DUMP -configfile $CATALINA_HOME/conf/cmdbuild/database.conf
-   
-} || { 
-    echo "DB was initiliazed. Use dbconfig recreate or dbconfig drop"
-}
+#     $CATALINA_HOME/webapps/cmdbuild/cmdbuild.sh dbconfig create $CMDBUILD_DUMP -configfile $CATALINA_HOME/conf/cmdbuild/database.conf
+# } || { 
+#     echo "DB was initiliazed. Use dbconfig recreate or dbconfig drop"
+# }
 
 #echo "Change user to tomcat"
 #su tomcat
