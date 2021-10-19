@@ -6,19 +6,9 @@ Makefile.in
 /config.h.in~
 /configure
 
-**/Makefile
-**/__pycache__
-
 /downloads'
 '/.
 
+services/django-ariaform
 
 
-
-/build
-/deploy
-
-
-# PROJECTS #
-services/django-ariaform/code
-services/django-ariaform/data
