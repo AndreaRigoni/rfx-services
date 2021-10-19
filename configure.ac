@@ -27,7 +27,6 @@ AC_PREREQ([2.69])
 AC_INIT([autoconf-bootstrap], [0.1], [andrea.rgn@gmail.com])
 AC_CONFIG_MACRO_DIRS([conf/m4])
 AC_CONFIG_AUX_DIR([conf])
-
 dnl AC_CONFIG_SRCDIR([...])
 AC_CANONICAL_TARGET
 
@@ -50,13 +49,6 @@ AX_KCONFIG([conf/kconfig])
 
 dnl AX_TARGET_SELFHELP /////////////////////////////////////////////////////////
 AX_TARGET_SELFHELP
-
-# //////////////////////////////////////////////////////////////////////////// #
-# //  DOCKER BUILD /////////////////////////////////////////////////////////// #
-# //////////////////////////////////////////////////////////////////////////// #
-
-m4_sinclude(conf/kscripts/docker.ac)
-AX_DOCKER_BUILD
 
 # //////////////////////////////////////////////////////////////////////////// #
 
@@ -85,7 +77,6 @@ AC_CHECK_PROGS([PERL],[perl])
 
 ## BUILD_COMMON ##
 m4_sinclude(conf/kscripts/build_common.ac)
-
 
 ## SERVICES ##
 m4_sinclude(services/docker_services.ac)
@@ -121,5 +112,8 @@ AC_CONFIG_FILES(
 				 services/image-super-resolution/Makefile
 				 services/gitlab-runner/Makefile
 				 services/etherpad/Makefile
+				 services/django-ariaform/Makefile
+				 services/cmdbuild/Makefile
+
                )
 AC_OUTPUT

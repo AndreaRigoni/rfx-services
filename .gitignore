@@ -8,6 +8,15 @@ Makefile
 /config.h.in~
 /configure
 
+/build/download
+/build/conf/node_modules
+/build
+/deploy
+
+/downloads'
+'/.
+
+
 /downloads'
 '/../../../../root/docker-devel/rfx-services
 services/mediawiki/assets
@@ -17,3 +26,5 @@ services/mediawiki/ssl/certs/wiki_igi_cnr_it.cer
 services/mediawiki/ssl/private/wiki.igi.cnr.it_2021.key
 services/mediawiki/images-ls-laR.txt
 services/mediawiki/rfxwiki.sqlite
+services/django-ariaform
+
