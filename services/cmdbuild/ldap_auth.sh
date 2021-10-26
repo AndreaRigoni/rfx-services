@@ -1,0 +1,11 @@
+./cmdbuild.sh restws setconfig org.cmdbuild.auth.methods LdapAuthenticator,DBAuthenticator
+./cmdbuild.sh restws setconfig org.cmdbuild.auth.ldap.server.address ntserv1.rfxoffline.local
+./cmdbuild.sh restws setconfig org.cmdbuild.auth.ldap.server.port 389
+./cmdbuild.sh restws setconfig org.cmdbuild.auth.ldap.use.ssl false
+./cmdbuild.sh restws setconfig org.cmdbuild.auth.ldap.use.tsl true
+./cmdbuild.sh restws setconfig org.cmdbuild.auth.ldap.basedn dc=mydomain,dc=com
+./cmdbuild.sh restws setconfig org.cmdbuild.auth.ldap.bind.attribute Users
+./cmdbuild.sh restws setconfig org.cmdbuild.auth.ldap.search.auth.method simple
+./cmdbuild.sh restws setconfig org.cmdbuild.auth.ldap.search.auth.password searchldap
+./cmdbuild.sh restws setconfig org.cmdbuild.auth.ldap.search.auth.principal uid=sAMAccountName,cn=ldapsearch,cn=Users,dc=rfxoffline,dc=local
+./cmdbuild.sh restws setconfig org.cmdbuild.auth.ldap.enabled true

@@ -104,6 +104,11 @@ menu CONFIG_SMTP_SERVICES
      string "administrator email"
      default "webmaster@igi.cnr.it"
 
+
+   config EMAIL_CUSTOM_HEADER
+     string "EMAIL_CUSTOM_HEADER"
+     default "RFXcode group"
+
    config EMAIL_CUSTOM_FOOTER
      string "EMAIL_CUSTOM_FOOTER"
      default "RFXcode group"

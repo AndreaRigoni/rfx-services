@@ -1,0 +1,16 @@
+[Unit]
+Description=docker rfx-service: mediawiki
+After=docker.service docker.socket network-online.target
+Wants=network-online.target docker.service 
+WantedBy=rfx-services.target
+BindsTo=network-online.target rfx-services.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/share/rfx-services/docker_utils.sh -v -c /usr/local/share/rfx-services/mediawiki/mediawiki.conf start
+ExecStop=/usr/local/share/rfx-services/docker_utils.sh -v -c /usr/local/share/rfx-services/mediawiki/mediawiki.conf stop
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+

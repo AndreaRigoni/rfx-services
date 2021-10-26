@@ -25,8 +25,12 @@ STORE_DATA = assets \
 SERVICE_DATA = LocalSettings.php \
 			   ldap.json \
 			   log 
-			   
+
 
 export WG_SITENAME = RFX intranet
+
+export REROUTE_IP = 150.178.3.49
+export REROUTE_PORTS = 80:80 443:443
+
 
 

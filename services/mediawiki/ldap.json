@@ -1,0 +1,33 @@
+{
+	"igi.cnr.it": {
+		"connection": {
+			"server": "ntserv1.rfxoffline.local",
+			"port": "389",
+			"user": "cn=ldapsearch,cn=Users,dc=rfxoffline,dc=local",
+			"pass": "searchldap",
+			"enctype": "notls",
+			"options": {
+				"LDAP_OPT_DEREF": 1
+			},
+			"basedn": "cn=Users,dc=rfxoffline,dc=local",
+			"userbasedn": "cn=Users,dc=rfxoffline,dc=local",
+			"groupbasedn": "cn=groups,cn=Users,dc=rfxoffline,dc=local",
+			"searchattribute": "cn",
+			"usernameattribute": "samaccountname",
+			"realnameattribute": "cn",
+			"emailattribute": "mail",
+			"grouprequest": "MediaWiki\\Extension\\LDAPProvider\\UserGroupsRequest\\UserMemberOf::factory",
+			"presearchusernamemodifiers": [ "spacestounderscores", "lowercase" ]
+		},
+		"userinfo": [],
+		"authorization": [],
+		"groupsync": {
+			"mapping": {
+				"engineering": "CN=EngineeringCoreTeam,OU=Groups,DC=acme,DC=com",
+				"bureaucrat": "CN=Mediawiki Admins,OU=Groups,DC=acme,DC=com",
+				"interface-admin": "CN=Mediawiki Admins,OU=Groups,DC=acme,DC=com",
+				"sysop": "CN=Mediawiki Admins,OU=Groups,DC=acme,DC=com"
+			}
+		}
+	}
+}

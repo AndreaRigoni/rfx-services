@@ -27,6 +27,7 @@ AC_PREREQ([2.69])
 AC_INIT([autoconf-bootstrap], [0.1], [andrea.rgn@gmail.com])
 AC_CONFIG_MACRO_DIRS([conf/m4])
 AC_CONFIG_AUX_DIR([conf])
+
 dnl AC_CONFIG_SRCDIR([...])
 AC_CANONICAL_TARGET
 
@@ -118,9 +119,10 @@ AC_CONFIG_FILES(
 				 services/open-balena/Makefile
 				 services/ghost/Makefile
 				 services/image-super-resolution/Makefile
-				 services/homeassistant/Makefile
 				 services/gitlab-runner/Makefile
 				 services/etherpad/Makefile
+				 services/django-ariaform/Makefile
+				 services/cmdbuild/Makefile
 
                )
 AC_OUTPUT

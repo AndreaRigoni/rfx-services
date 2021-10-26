@@ -115,7 +115,7 @@ reroute_ports () {
     done
   }
 
-  chain_remove ${IPT_CHAIN} 2>/dev/null
+  chain_remove ${IPT_CHAIN} || :
   chain_init ${IPT_CHAIN}
   # LOOP PORTS
   for p in ${reroute_ports}; do
